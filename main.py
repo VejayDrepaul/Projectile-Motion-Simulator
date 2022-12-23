@@ -7,7 +7,9 @@ HEIGHT = 500 #Window height
 WINDOW_X = 410 #x-axis startup position of window
 WINDOW_Y = 225 #y-axis startup position of 
 BLACK = (0, 0, 0)
-GRAVITY = 9.81
+GRAVITY = 9.80665
+INITIAL_X = 0 #Initial x-value
+INITIAL_Y = 0 #Initial y-value
 
 
 # Initial window setup
@@ -31,24 +33,35 @@ def draw_axis():
     
 
 def ball_movement(velocity, angle):
-    vx = velocity * math.cos(angle) #x-axis velocity
-    vy = velocity * math.sin(angle) #y-axis velocity
-
     ball = turtle.Turtle()
     ball.shape("circle")
-    ball.setheading(30)
-    ball.forward(30)
+
+    vx = velocity * math.cos(math.radians(angle)) #x-axis velocity
+    vy = velocity * math.sin(math.radians(angle)) #y-axis velocity
+    flight_time = 2*(vy)/GRAVITY
+    print(flight_time)
+
+    x_dist = vx * flight_time
+    y_dist = (vy * flight_time) + ((GRAVITY * flight_time**2) / 2)
+
+    t = 0
+    """
+    for t in range(0, int(flight_time)):
+        x = vx * t + INITIAL_X
+        y = vy * t - (((t**2) * GRAVITY) / 2) + INITIAL_Y
+        ball.goto(x, y)
+        """
+    while t <= flight_time:
+        x = vx * t + INITIAL_X
+        y = vy * t - (((t**2) * GRAVITY) / 2) + INITIAL_Y
+        ball.goto(x, y)
+        t += 0.01
 
 
 def main():
     draw_axis()
     ball_movement(velocity, angle)
-    
-
     turtle.done()
-
-
-
 
 
 if __name__ == "__main__":
