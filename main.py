@@ -6,8 +6,7 @@ WIDTH = 1200 #Window width
 HEIGHT = 500 #Window height
 WINDOW_X = 410 #x-axis startup position of window
 WINDOW_Y = 225 #y-axis startup position of 
-BLACK = (0, 0, 0)
-GRAVITY = 9.80665
+GRAVITY = 9.80665 #Force of gravity
 INITIAL_X = 0 #Initial x-value
 INITIAL_Y = 0 #Initial y-value
 
@@ -38,7 +37,7 @@ def ball_movement(velocity, angle):
 
     vx = velocity * math.cos(math.radians(angle)) #x-axis velocity
     vy = velocity * math.sin(math.radians(angle)) #y-axis velocity
-    flight_time = 2*(vy)/GRAVITY
+    flight_time = 2*(vy)/GRAVITY #flight time of projectile
 
     t = 0
     while t <= flight_time:
