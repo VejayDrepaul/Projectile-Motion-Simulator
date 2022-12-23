@@ -39,23 +39,13 @@ def ball_movement(velocity, angle):
     vx = velocity * math.cos(math.radians(angle)) #x-axis velocity
     vy = velocity * math.sin(math.radians(angle)) #y-axis velocity
     flight_time = 2*(vy)/GRAVITY
-    print(flight_time)
-
-    x_dist = vx * flight_time
-    y_dist = (vy * flight_time) + ((GRAVITY * flight_time**2) / 2)
 
     t = 0
-    """
-    for t in range(0, int(flight_time)):
-        x = vx * t + INITIAL_X
-        y = vy * t - (((t**2) * GRAVITY) / 2) + INITIAL_Y
-        ball.goto(x, y)
-        """
     while t <= flight_time:
         x = vx * t + INITIAL_X
         y = vy * t - (((t**2) * GRAVITY) / 2) + INITIAL_Y
         ball.goto(x, y)
-        t += 0.01
+        t += 0.05   
 
 
 def main():
