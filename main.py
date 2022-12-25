@@ -29,22 +29,35 @@ def draw_axis():
     y = turtle.Turtle()
     y.setheading(90)
     y.forward(HEIGHT)
-    
+
 
 def ball_movement(velocity, angle):
     ball = turtle.Turtle()
     ball.shape("circle")
 
-    vx = velocity * math.cos(math.radians(angle)) #x-axis velocity
-    vy = velocity * math.sin(math.radians(angle)) #y-axis velocity
+    vx = velocity * math.cos(math.radians(angle)) #velocity on x-axis
+    vy = velocity * math.sin(math.radians(angle)) #velocity on y-axis
     flight_time = 2*(vy)/GRAVITY #flight time of projectile
+    y_max = vy * (flight_time / 2) - ((((flight_time / 2)**2) * GRAVITY) / 2) + INITIAL_Y
+    x_half = vx * (flight_time / 2) + INITIAL_X
 
+    max = turtle.Turtle()
+    max.shape("circle")
+    max.hideturtle()
+    max.penup()
+    
     t = 0
     while t <= flight_time:
         x = vx * t + INITIAL_X
         y = vy * t - (((t**2) * GRAVITY) / 2) + INITIAL_Y
         ball.goto(x, y)
         t += 0.05   
+
+
+    max.goto(x_half, y_max)
+    max.setheading(270)
+    max.forward(HEIGHT - y_max)
+    max.showturtle()
 
 
 def main():
