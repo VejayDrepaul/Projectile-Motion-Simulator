@@ -17,7 +17,12 @@
 
 std::tuple<double, double> calculations(double vx, double vy);
 
-int main(int argc, char* args[]) {
+int main(int argc, char* argv[]) {
+    if (argc > 3) {
+        std::cout << "You have entered too many CLI arguments!" << std::endl;
+        return -1;
+    }
+
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("Projectile Motion Simulator", WINDOW_X, WINDOW_Y,
                                             WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
@@ -31,8 +36,8 @@ int main(int argc, char* args[]) {
 
     double ball_x = 30;
     double ball_y = INITIAL_Y;
-    double initial_velocity = 50; // Adjust the initial velocity as needed
-    double initial_angle = 45; // Adjust the initial angle as needed
+    double initial_velocity = std::stod(argv[1]); // Adjust the initial velocity as needed
+    double initial_angle = std::stod(argv[2]); // Adjust the initial angle as needed
     double vx = initial_velocity * std::cos(initial_angle * M_PI / 180.0);
     double vy = -initial_velocity * std::sin(initial_angle * M_PI / 180.0);
     int frame_delay = 1000 / FRAME_RATE;
