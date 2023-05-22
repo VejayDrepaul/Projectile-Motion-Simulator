@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <SDL2/SDL.h>
 #include <tuple>
 #include <cmath>
